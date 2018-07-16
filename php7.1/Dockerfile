@@ -13,5 +13,5 @@ RUN apt-get update \
     && docker-php-ext-install -j$(nproc) iconv mcrypt pdo_mysql mysqli\
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
-RUN echo "Asia/Shanghai" > /etc/timezone
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY php.ini /usr/local/etc/php/

@@ -5,18 +5,23 @@ services:
     build: $PWD/mysql5.7
     restart: always
     volumes:
-      - /data/mysql:/var/lib/mysql
+      - $PWD/mysql5.7/mysql.conf.d/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+      - /srv/dockerData/mysql:/var/lib/mysql
     privileged: true
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     ports:
       - 3306:3306
+    command:
+      - --sql-mode=NO_ENGINE_SUBSTITUTION
   php71:
     build: $PWD/php7.1
     restart: always
     volumes:
       - $PWD/www:/srv/web/www
     privileged: true
+    links:
+      - mysql57
     depends_on:
       - mysql57
   web:
