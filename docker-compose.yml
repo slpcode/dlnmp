@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  mysql57:
+    build: $PWD/mysql5.7
+    restart: always
+    volumes:
+      - /data/mysql:/var/lib/mysql
+    privileged: true
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3306:3306
+  php71:
+    build: $PWD/php7.1
+    restart: always
+    volumes:
+      - $PWD/www:/srv/web/www
+    privileged: true
+    depends_on:
+      - mysql57
+  web:
+    build: $PWD/nginx
+    restart: always
+    volumes:
+      - $PWD/www:/srv/web/www
+      - $PWD/nginx/conf.d:/etc/nginx/conf.d
+    privileged: true
+    ports:
+      - 80:80
+    links:
+      - php71
+    depends_on:
+      - php71
