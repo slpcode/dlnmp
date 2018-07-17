@@ -14,4 +14,4 @@ RUN apt-get update \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-COPY php.ini /usr/local/etc/php/
+#COPY php.ini /usr/local/etc/php/

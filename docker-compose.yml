@@ -18,18 +18,22 @@ services:
     build: $PWD/php7.1
     restart: always
     volumes:
-      - $PWD/www:/srv/web/www
+      - /srv/web/www:/srv/web/www
+      - $PWD/php7.1/php.ini:/usr/local/etc/php/php.ini
+      - /srv/dockerCache/composer:/composer
     privileged: true
     links:
       - mysql57
+      - redis4
     depends_on:
       - mysql57
   web:
     build: $PWD/nginx
     restart: always
     volumes:
-      - $PWD/www:/srv/web/www
+      - /srv/web/www:/srv/web/www
       - $PWD/nginx/conf.d:/etc/nginx/conf.d
+      - $PWD/nginx/nginx.conf:/etc/nginx/nginx.conf
     privileged: true
     ports:
       - 80:80
@@ -37,3 +41,13 @@ services:
       - php71
     depends_on:
       - php71
+  redis4:
+    image: 'redis:4.0'
+    restart: always
+    command:
+      - --appendonly yes
+    volumes:
+      - /srv/dockerData/redis:/data
+    privileged: true
+    ports:
+      - 6379:6379
