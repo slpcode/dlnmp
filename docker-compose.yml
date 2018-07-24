@@ -20,7 +20,7 @@ services:
     volumes:
       - /srv/web/www:/srv/web/www
       - $PWD/php7.1/php.ini:/usr/local/etc/php/php.ini
-      - /srv/dockerCache/composer:/composer
+      - /srv/dockerCache/composer:/root/.composer
     privileged: true
     links:
       - mysql57

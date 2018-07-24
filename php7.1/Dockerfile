@@ -14,3 +14,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && docker-php-ext-install -j$(nproc) gd \
     # 安装supervisor
     && apt-get install -y supervisor
+    # composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN /usr/bin/composer config -g repo.packagist composer https://packagist.phpcomposer.com \
+    && ln -s /root/.composer/vendor/bin/laravel /usr/bin/laravel
