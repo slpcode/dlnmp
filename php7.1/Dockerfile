@@ -16,5 +16,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && apt-get install -y supervisor
     # composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN /usr/bin/composer config -g repo.packagist composer https://packagist.phpcomposer.com \
-    && ln -s /root/.composer/vendor/bin/laravel /usr/bin/laravel
+RUN mkdir /composer \
+    && /usr/bin/composer config -g repo.packagist composer https://packagist.phpcomposer.com
+ENV PATH $PATH:/composer/vendor/bin
+ENV COMPOSER_HOME /composer
