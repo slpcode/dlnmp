@@ -11,8 +11,8 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev zlib1g-dev libicu-dev g++ libxml2-dev
 RUN docker-php-ext-install -j$(nproc) bcmath exif gettext intl pcntl shmop soap sockets sysvmsg sysvsem sysvshm zip iconv mcrypt pdo_mysql mysqli \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd \
-    && pecl install xdebug \
+    && docker-php-ext-install -j$(nproc) gd
+RUN pecl install xdebug-2.6.0 \
     && docker-php-ext-enable xdebug \
     # 安装supervisor
     && apt-get install -y supervisor
