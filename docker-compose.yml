@@ -14,6 +14,19 @@ services:
       - 3306:3306
     command:
       - --sql-mode=NO_ENGINE_SUBSTITUTION
+  php56:
+      build: $PWD/php5.6
+      restart: always
+      volumes:
+        - /srv/web/www:/srv/web/www
+        - $PWD/php5.6/php.ini:/usr/local/etc/php/php.ini
+        - /srv/dockerCache/composer:/composer
+      privileged: true
+      links:
+        - mysql57
+        - redis4
+      depends_on:
+        - mysql57
   php71:
     build: $PWD/php7.1
     restart: always
@@ -27,6 +40,19 @@ services:
       - redis4
     depends_on:
       - mysql57
+  php72:
+      build: $PWD/php7.2
+      restart: always
+      volumes:
+        - /srv/web/www:/srv/web/www
+        - $PWD/php7.2/php.ini:/usr/local/etc/php/php.ini
+        - /srv/dockerCache/composer:/composer
+      privileged: true
+      links:
+        - mysql57
+        - redis4
+      depends_on:
+        - mysql57
   web:
     build: $PWD/nginx
     restart: always
@@ -38,9 +64,13 @@ services:
     ports:
       - 80:80
     links:
+      - php56
       - php71
+      - php72
     depends_on:
+      - php56
       - php71
+      - php72
   redis4:
     image: 'redis:4.0'
     restart: always

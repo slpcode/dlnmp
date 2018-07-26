@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:5.6-fpm
 MAINTAINER <1370808424@qq.com>矢量丿
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
     && echo "deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free" >/etc/apt/sources.list \
@@ -12,8 +12,6 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
 RUN docker-php-ext-install -j$(nproc) bcmath exif gettext intl pcntl shmop soap sockets sysvmsg sysvsem sysvshm zip iconv mcrypt pdo_mysql mysqli \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
     # 安装supervisor
     && apt-get install -y supervisor
     # composer
