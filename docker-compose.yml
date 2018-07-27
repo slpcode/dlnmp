@@ -14,6 +14,19 @@ services:
       - 3306:3306
     command:
       - --sql-mode=NO_ENGINE_SUBSTITUTION
+  php53:
+      build: $PWD/php5.3
+      restart: always
+      volumes:
+        - /srv/web/www:/srv/web/www
+        - $PWD/php5.3/php.ini:/usr/local/etc/php/php.ini
+        - /srv/dockerCache/composer:/composer
+      privileged: true
+      links:
+        - mysql57
+        - redis4
+      depends_on:
+        - mysql57
   php56:
       build: $PWD/php5.6
       restart: always
@@ -64,10 +77,12 @@ services:
     ports:
       - 80:80
     links:
+      - php53
       - php56
       - php71
       - php72
     depends_on:
+      - php53
       - php56
       - php71
       - php72
