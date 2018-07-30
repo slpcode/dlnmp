@@ -21,5 +21,6 @@ RUN pecl install xdebug-2.2.7 \
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN mkdir /composer \
     && /usr/bin/composer config -g repo.packagist composer https://packagist.phpcomposer.com
+RUN apt-get install -y git
 ENV PATH $PATH:/composer/vendor/bin
 ENV COMPOSER_HOME /composer
