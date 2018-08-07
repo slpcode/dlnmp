@@ -1,12 +1,25 @@
 version: '3'
 
 services:
+  mysql56:
+    build: $PWD/mysql5.6
+    restart: always
+    volumes:
+      - /srv/dockerData/mysql56:/var/lib/mysql
+    privileged: true
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3307:3306
+    command:
+      - --sql-mode=NO_ENGINE_SUBSTITUTION
   mysql57:
     build: $PWD/mysql5.7
     restart: always
     volumes:
       - $PWD/mysql5.7/mysql.conf.d/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
       - /srv/dockerData/mysql:/var/lib/mysql
+      - /srv/web/logs:/srv/web/logs
     privileged: true
     environment:
       MYSQL_ROOT_PASSWORD: 123456
@@ -14,61 +27,75 @@ services:
       - 3306:3306
     command:
       - --sql-mode=NO_ENGINE_SUBSTITUTION
+      - --general-log=ON
+      - --general-log-file=/srv/web/logs/mysql.log
   php53:
     build: $PWD/php5.3
     restart: always
     volumes:
       - /srv/web/www:/srv/web/www
+      - /srv/web/logs:/srv/web/logs
       - $PWD/php5.3/php.ini:/usr/local/etc/php/php.ini
       - /srv/dockerCache/composer:/composer
     privileged: true
     working_dir: /srv/web/www
     links:
+      - mysql56
       - mysql57
       - redis4
     depends_on:
+      - mysql56
       - mysql57
   php56:
     build: $PWD/php5.6
     restart: always
     volumes:
       - /srv/web/www:/srv/web/www
+      - /srv/web/logs:/srv/web/logs
       - $PWD/php5.6/php.ini:/usr/local/etc/php/php.ini
       - /srv/dockerCache/composer:/composer
     privileged: true
     working_dir: /srv/web/www
     links:
+      - mysql56
       - mysql57
       - redis4
     depends_on:
+      - mysql56
       - mysql57
   php71:
     build: $PWD/php7.1
     restart: always
     volumes:
       - /srv/web/www:/srv/web/www
+      - /srv/web/logs:/srv/web/logs
       - $PWD/php7.1/php.ini:/usr/local/etc/php/php.ini
       - /srv/dockerCache/composer:/composer
     privileged: true
     working_dir: /srv/web/www
     links:
+      - mysql56
       - mysql57
       - redis4
     depends_on:
+      - mysql56
       - mysql57
   php72:
     build: $PWD/php7.2
     restart: always
     volumes:
       - /srv/web/www:/srv/web/www
+      - /srv/web/logs:/srv/web/logs
       - $PWD/php7.2/php.ini:/usr/local/etc/php/php.ini
       - /srv/dockerCache/composer:/composer
     privileged: true
     working_dir: /srv/web/www
     links:
+      - mysql56
       - mysql57
       - redis4
     depends_on:
+      - mysql56
       - mysql57
   web:
     build: $PWD/nginx
