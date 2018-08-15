@@ -1,10 +1,8 @@
 FROM php:7.1-fpm
 MAINTAINER <1370808424@qq.com>矢量丿
+COPY ./sources.list /sources.list
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
-    && echo "deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free" >/etc/apt/sources.list \
-    && echo "deb-src http://mirrors.ustc.edu.cn/debian stable main contrib non-free" >>/etc/apt/sources.list \
-    && echo "deb http://mirrors.ustc.edu.cn/debian stable-proposed-updates main contrib non-free" >>/etc/apt/sources.list \
-    && echo "deb-src http://mirrors.ustc.edu.cn/debian stable-proposed-updates main contrib non-free" >>/etc/apt/sources.list \
+    && cp /sources.list /etc/apt/sources.list \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     # 安装php扩展
     && apt-get update \
@@ -13,7 +11,9 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak \
 RUN docker-php-ext-install -j$(nproc) bcmath exif gettext intl pcntl shmop soap sockets sysvmsg sysvsem sysvshm zip iconv mcrypt pdo_mysql mysqli \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
-RUN pecl install xdebug-2.6.0 \
+RUN cp /sources.list /etc/apt/sources.list \
+    && apt-get update \
+    && pecl install xdebug-2.6.0 \
     && docker-php-ext-enable xdebug \
     # 安装supervisor
     && apt-get install -y --no-install-recommends supervisor \
@@ -22,7 +22,9 @@ RUN pecl install xdebug-2.6.0 \
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN mkdir /composer \
     && /usr/bin/composer config -g repo.packagist composer https://packagist.laravel-china.org
-RUN apt-get install -y --no-install-recommends git \
+RUN cp /sources.list /etc/apt/sources.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends git \
     && rm -rf /var/lib/apt/lists/*
 ENV PATH $PATH:/composer/vendor/bin
 ENV COMPOSER_HOME /composer
