@@ -31,6 +31,3 @@ symbolic-links=0
 
 #添加
 sql_mode = 'NO_ENGINE_SUBSTITUTION'
-
-general_log=ON
-general_log_file=/srv/web/logs/mysql.log
