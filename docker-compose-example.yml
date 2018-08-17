@@ -72,6 +72,9 @@ services:
       - /srv/dockerCache/composer:/composer
     privileged: true
     working_dir: /srv/web/www
+#    command:
+#      - touch /srv/web/logs/index.txt
+#      - /usr/local/bin/composer config -g repo.packagist composer https://packagist.laravel-china.org
     links:
       - mysql56
       - mysql57
