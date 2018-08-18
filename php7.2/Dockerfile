@@ -6,7 +6,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     icu-dev gettext-dev libxml2-dev \
     libmcrypt-dev libjpeg-turbo-dev libpng-dev freetype-dev autoconf g++ make \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && apk del git tzdata
+    && apk del tzdata
 
 RUN docker-php-ext-install bcmath exif gettext intl pcntl shmop soap sockets sysvmsg sysvsem sysvshm zip iconv pdo_mysql mysqli \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \

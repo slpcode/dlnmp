@@ -2,6 +2,7 @@ version: '3'
 
 services:
   mysql56:
+    container_name: mysql56
     build: $PWD/mysql5.6
     restart: always
     volumes:
@@ -14,6 +15,7 @@ services:
     command:
       - --sql-mode=NO_ENGINE_SUBSTITUTION
   mysql57:
+    container_name: mysql57
     build: $PWD/mysql5.7
     restart: always
     volumes:
@@ -29,13 +31,14 @@ services:
 #      - --general-log=ON
 #      - --general-log-file=/srv/web/logs/mysql.log
 #  php53:
+#    container_name: php53
 #    build: $PWD/php5.3
 #    restart: always
 #    volumes:
 #      - /srv/web/www:/srv/web/www
 #      - /srv/web/logs:/srv/web/logs
 #      - $PWD/php5.3/php.ini:/usr/local/etc/php/php.ini
-#      - /srv/dockerCache/composer:/composer
+#      - composer-data:/composer
 #    privileged: true
 #    working_dir: /srv/web/www
 #    links:
@@ -46,13 +49,14 @@ services:
 #      - mysql56
 #      - mysql57
   php56:
+    container_name: php56
     build: $PWD/php5.6
     restart: always
     volumes:
       - /srv/web/www:/srv/web/www
       - /srv/web/logs:/srv/web/logs
       - $PWD/php5.6/php.ini:/usr/local/etc/php/php.ini
-      - /srv/dockerCache/composer:/composer
+      - composer-data:/composer
     privileged: true
     working_dir: /srv/web/www
     links:
@@ -63,13 +67,14 @@ services:
       - mysql56
       - mysql57
   php71:
+    container_name: php71
     build: $PWD/php7.1
     restart: always
     volumes:
       - /srv/web/www:/srv/web/www
       - /srv/web/logs:/srv/web/logs
       - $PWD/php7.1/php.ini:/usr/local/etc/php/php.ini
-      - /srv/dockerCache/composer:/composer
+      - composer-data:/composer
     privileged: true
     working_dir: /srv/web/www
     links:
@@ -80,13 +85,14 @@ services:
       - mysql56
       - mysql57
   php72:
+    container_name: php72
     build: $PWD/php7.2
     restart: always
     volumes:
       - /srv/web/www:/srv/web/www
       - /srv/web/logs:/srv/web/logs
       - $PWD/php7.2/php.ini:/usr/local/etc/php/php.ini
-      - /srv/dockerCache/composer:/composer
+      - composer-data:/composer
     privileged: true
     working_dir: /srv/web/www
     links:
@@ -96,7 +102,8 @@ services:
     depends_on:
       - mysql56
       - mysql57
-  web:
+  nginx:
+    container_name: nginx
     build: $PWD/nginx
     restart: always
     volumes:
@@ -117,6 +124,7 @@ services:
       - php71
       - php72
   redis4:
+    container_name: redis4
     build: $PWD/redis4.0
     restart: always
     command:
@@ -126,3 +134,7 @@ services:
     privileged: true
     ports:
       - 6379:6379
+
+volumes:
+  composer-data:
+    external: true
