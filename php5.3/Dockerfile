@@ -21,10 +21,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
     # composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+ENV PATH $PATH:/composer/vendor/bin
+ENV COMPOSER_HOME /composer
+
 RUN mkdir /composer \
     && /usr/bin/composer config -g repo.packagist composer https://packagist.laravel-china.org
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git \
     && rm -rf /var/lib/apt/lists/*
-ENV PATH $PATH:/composer/vendor/bin
-ENV COMPOSER_HOME /composer
