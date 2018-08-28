@@ -15,7 +15,7 @@ services:
     command:
       - --sql-mode=NO_ENGINE_SUBSTITUTION
     networks:
-      lnmp_net:
+      app_net:
         ipv4_address: 172.16.238.2
 
 
@@ -36,7 +36,7 @@ services:
 #      - --general-log=ON
 #      - --general-log-file=/srv/web/logs/mysql.log
     networks:
-      lnmp_net:
+      app_net:
         ipv4_address: 172.16.238.3
 
 #  php53:
@@ -59,7 +59,7 @@ services:
 #      - mysql57
 #      - redis4
 #    networks:
-#      lnmp_net:
+#      app_net:
 #        ipv4_address: 172.16.238.4
 
   php56:
@@ -82,7 +82,7 @@ services:
       - mysql57
       - redis4
     networks:
-      lnmp_net:
+      app_net:
         ipv4_address: 172.16.238.5
 
 
@@ -106,7 +106,7 @@ services:
       - mysql57
       - redis4
     networks:
-      lnmp_net:
+      app_net:
         ipv4_address: 172.16.238.6
 
 
@@ -130,7 +130,7 @@ services:
       - mysql57
       - redis4
     networks:
-      lnmp_net:
+      app_net:
         ipv4_address: 172.16.238.7
 
 
@@ -156,7 +156,7 @@ services:
       - php71
       - php72
     networks:
-      lnmp_net:
+      app_net:
         ipv4_address: 172.16.238.8
 
 
@@ -172,7 +172,7 @@ services:
     ports:
       - 6379:6379
     networks:
-      lnmp_net:
+      app_net:
         ipv4_address: 172.16.238.9
 
 # 挂载
@@ -180,11 +180,15 @@ volumes:
   composer-data:
     external: true
 
-# 网络配置
 networks:
-  lnmp_net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.16.238.0/24
+  app_net:
+    external: true
+
+# 网络配置
+#networks:
+#  lnmp_net:
+#    driver: bridge
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 172.16.238.0/24
