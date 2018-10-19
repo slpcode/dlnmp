@@ -39,29 +39,6 @@ services:
       app_net:
         ipv4_address: 172.16.238.3
 
-#  php53:
-#    container_name: php53
-#    build: $PWD/php5.3
-#    restart: always
-#    volumes:
-#      - /srv/web/www:/srv/web/www
-#      - /srv/web/logs:/srv/web/logs
-#      - $PWD/php5.3/php.ini:/usr/local/etc/php/php.ini
-#      - composer-data:/composer
-#    privileged: true
-#    working_dir: /srv/web/www
-#    links:
-#      - mysql56
-#      - mysql57
-#      - redis4
-#    depends_on:
-#      - mysql56
-#      - mysql57
-#      - redis4
-#    networks:
-#      app_net:
-#        ipv4_address: 172.16.238.4
-
   php56:
     container_name: php56
     build: $PWD/php5.6
@@ -146,12 +123,10 @@ services:
     ports:
       - 80:80
     links:
-#      - php53
       - php56
       - php71
       - php72
     depends_on:
-#      - php53
       - php56
       - php71
       - php72
