@@ -1,4 +1,4 @@
-FROM nginx:1.15.2-alpine
+FROM nginx:1.15.7-alpine
 MAINTAINER <1370808424@qq.com>矢量丿
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
     && apk add --no-cache tzdata \
