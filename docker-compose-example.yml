@@ -150,6 +150,38 @@ services:
       app_net:
         ipv4_address: 172.16.238.9
 
+  mongo:
+    container_name: mongo3.4
+    image: mongo:3.4
+    restart: always
+    volumes:
+      - /srv/dockerData/mongodbData:/data/db
+    privileged: true
+    ports:
+      - '27017:27017'
+    #    environment:
+    #      MONGO_INITDB_ROOT_USERNAME: root
+    #      MONGO_INITDB_ROOT_PASSWORD: 123456
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.10
+
+  mongo-express:
+    container_name: mongo3.4
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+    privileged: true
+    #    environment:
+    #      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+    #      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.11
+
 # 挂载
 volumes:
   composer-data:

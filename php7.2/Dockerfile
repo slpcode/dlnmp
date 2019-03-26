@@ -13,7 +13,9 @@ RUN docker-php-ext-install bcmath exif gettext intl pcntl shmop soap sockets sys
     && docker-php-ext-install gd
 
 RUN pecl install xdebug-2.6.0 \
-    && docker-php-ext-enable xdebug
+    && pecl install mongodb-1.5.3 \
+    && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable mongodb
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
