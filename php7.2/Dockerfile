@@ -2,6 +2,7 @@ FROM php:7.2.8-fpm-alpine3.7
 MAINTAINER <1370808424@qq.com>矢量丿
 # 安装php扩展
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+#RUN apk add --no-cache tzdata git \
     && apk add --no-cache tzdata git \
     icu-dev gettext-dev libxml2-dev \
     libmcrypt-dev libjpeg-turbo-dev libpng-dev freetype-dev autoconf g++ make \

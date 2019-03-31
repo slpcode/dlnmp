@@ -167,7 +167,7 @@ services:
         ipv4_address: 172.16.238.10
 
   mongo-express:
-    container_name: mongo3.4
+    container_name: mongo-express
     image: mongo-express
     restart: always
     ports:
