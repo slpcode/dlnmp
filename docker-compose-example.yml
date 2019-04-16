@@ -1,22 +1,22 @@
 version: '3'
 
 services:
-  mysql56:
-    container_name: mysql56
-    build: $PWD/mysql5.6
-    restart: always
-    volumes:
-      - /srv/dockerData/mysql56:/var/lib/mysql
-    privileged: true
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-    ports:
-      - 3307:3306
-    command:
-      - --sql-mode=NO_ENGINE_SUBSTITUTION
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.2
+#  mysql56:
+#    container_name: mysql56
+#    build: $PWD/mysql5.6
+#    restart: always
+#    volumes:
+#      - /srv/dockerData/mysql56:/var/lib/mysql
+#    privileged: true
+#    environment:
+#      MYSQL_ROOT_PASSWORD: 123456
+#    ports:
+#      - 3307:3306
+#    command:
+#      - --sql-mode=NO_ENGINE_SUBSTITUTION
+#    networks:
+#      app_net:
+#        ipv4_address: 172.16.238.2
 
 
   mysql57:
@@ -39,28 +39,28 @@ services:
       app_net:
         ipv4_address: 172.16.238.3
 
-  php56:
-    container_name: php56
-    build: $PWD/php5.6
-    restart: always
-    volumes:
-      - /srv/web/www:/srv/web/www
-      - /srv/web/logs:/srv/web/logs
-      - $PWD/php5.6/php.ini:/usr/local/etc/php/php.ini
-      - composer-data:/composer
-    privileged: true
-    working_dir: /srv/web/www
-    links:
-      - mysql56
-      - mysql57
-      - redis4
-    depends_on:
-      - mysql56
-      - mysql57
-      - redis4
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.5
+#  php56:
+#    container_name: php56
+#    build: $PWD/php5.6
+#    restart: always
+#    volumes:
+#      - /srv/web/www:/srv/web/www
+#      - /srv/web/logs:/srv/web/logs
+#      - $PWD/php5.6/php.ini:/usr/local/etc/php/php.ini
+#      - composer-data:/composer
+#    privileged: true
+#    working_dir: /srv/web/www
+#    links:
+#      - mysql56
+#      - mysql57
+#      - redis4
+#    depends_on:
+#      - mysql56
+#      - mysql57
+#      - redis4
+#    networks:
+#      app_net:
+#        ipv4_address: 172.16.238.5
 
 
   php71:
@@ -74,12 +74,14 @@ services:
       - composer-data:/composer
     privileged: true
     working_dir: /srv/web/www
+    ports:
+      - '9501-9510:9501-9510'
     links:
-      - mysql56
+#      - mysql56
       - mysql57
       - redis4
     depends_on:
-      - mysql56
+#      - mysql56
       - mysql57
       - redis4
     networks:
@@ -98,12 +100,14 @@ services:
       - composer-data:/composer
     privileged: true
     working_dir: /srv/web/www
+    ports:
+      - '9511-9521:9501-9511'
     links:
-      - mysql56
+#      - mysql56
       - mysql57
       - redis4
     depends_on:
-      - mysql56
+#      - mysql56
       - mysql57
       - redis4
     networks:
@@ -123,11 +127,11 @@ services:
     ports:
       - 80:80
     links:
-      - php56
+#      - php56
       - php71
       - php72
     depends_on:
-      - php56
+#      - php56
       - php71
       - php72
     networks:
