@@ -186,9 +186,26 @@ services:
       app_net:
         ipv4_address: 172.16.238.11
 
+  portainer:
+    container_name: portainer
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    privileged: true
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.12
+
 # 挂载
 volumes:
   composer-data:
+    external: true
+  portainer_data:
     external: true
 
 networks:
