@@ -1,4 +1,5 @@
-FROM php:7.1.20-fpm-alpine3.7
+#FROM php:7.1.20-fpm-alpine3.7
+FROM php:7.1.30-fpm-alpine3.10
 MAINTAINER <1370808424@qq.com>矢量丿
 # 安装php扩展
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
@@ -26,5 +27,7 @@ ENV COMPOSER_HOME /composer
 
 RUN mkdir /composer \
     && /usr/bin/composer selfupdate \
-    && /usr/bin/composer config -g repo.packagist composer https://packagist.laravel-china.org \
+    && /usr/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
     && composer global require symfony/var-dumper -vvv
+
+COPY cacert.pem /usr/local/etc/php/cacert.pem
