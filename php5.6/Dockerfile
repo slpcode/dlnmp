@@ -25,6 +25,6 @@ ENV PATH $PATH:/composer/vendor/bin
 ENV COMPOSER_HOME /composer
 
 RUN mkdir /composer \
-    && /usr/bin/composer config -g repo.packagist composer https://packagist.laravel-china.org \
+    && /usr/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
     && /usr/bin/composer selfupdate
 
