@@ -39,6 +39,25 @@ services:
       app_net:
         ipv4_address: 172.16.238.3
 
+  mysql8:
+    container_name: mysql8
+    build: $PWD/mysql8
+    restart: always
+    volumes:
+      - /srv/dockerData/mysql8:/var/lib/mysql
+    privileged: true
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3308:3306
+    #command:
+    #  - --sql-mode=NO_ENGINE_SUBSTITUTION
+    #      - --general-log=ON
+    #      - --general-log-file=/srv/web/logs/mysql.log
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.14
+
 #  php56:
 #    container_name: php56
 #    build: $PWD/php5.6
@@ -113,6 +132,31 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.238.7
+
+  php73:
+    container_name: php73
+    build: $PWD/php7.3
+    restart: always
+    volumes:
+      - /srv/web/www:/srv/web/www
+      - /srv/web/logs:/srv/web/logs
+      - $PWD/php7.3/php.ini:/usr/local/etc/php/php.ini
+      - composer-data:/composer
+    privileged: true
+    working_dir: /srv/web/www
+    ports:
+      - '9511-9521:9501-9511'
+    links:
+      #      - mysql56
+      - mysql8
+      - redis4
+    depends_on:
+      #      - mysql56
+      - mysql8
+      - redis4
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.13
 
 
   nginx:
