@@ -7,6 +7,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && apk add --no-cache tzdata git \
     icu-dev gettext-dev libxml2-dev libzip libzip-dev \
     libmcrypt-dev libjpeg-turbo-dev libpng-dev freetype-dev autoconf g++ make \
+    openssl openssl-dev \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && apk del tzdata
 
@@ -29,6 +30,12 @@ RUN docker-php-ext-install bcmath exif gettext intl pcntl shmop soap sockets sys
 #    && docker-php-ext-enable xdebug \
 #    && docker-php-ext-enable mongodb \
 #    && docker-php-ext-enable swoole
+RUN pecl install mongodb \
+   && pecl install swoole \
+#    && docker-php-ext-enable xdebug \
+   && docker-php-ext-enable mongodb \
+   && docker-php-ext-enable swoole
+
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
@@ -38,3 +45,5 @@ ENV COMPOSER_HOME /composer
 RUN mkdir /composer \
     && /usr/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
     && /usr/bin/composer selfupdate
+
+

@@ -6,6 +6,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && apk add --no-cache tzdata git \
     icu-dev gettext-dev libxml2-dev \
     libmcrypt-dev libjpeg-turbo-dev libpng-dev freetype-dev autoconf g++ make imagemagick imagemagick-dev \
+    openssl openssl-dev \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && apk del tzdata
 
@@ -31,5 +32,3 @@ RUN mkdir /composer \
     && /usr/bin/composer selfupdate \
     && /usr/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
     && composer global require symfony/var-dumper -vvv
-
-COPY cacert.pem /usr/local/etc/php/cacert.pem
