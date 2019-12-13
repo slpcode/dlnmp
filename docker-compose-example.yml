@@ -59,107 +59,6 @@ services:
       app_net:
         ipv4_address: 172.16.238.14
 
-#  php56:
-#    container_name: php56
-#    build: $PWD/php5.6
-#    restart: always
-#    volumes:
-#      - /srv/web/www:/srv/web/www
-#      - /srv/web/logs:/srv/web/logs
-#      - $PWD/php5.6/php.ini:/usr/local/etc/php/php.ini
-#      - composer-data:/composer
-#    privileged: true
-#    working_dir: /srv/web/www
-#    links:
-#      - mysql56
-#      - mysql57
-#      - redis4
-#    depends_on:
-#      - mysql56
-#      - mysql57
-#      - redis4
-#    networks:
-#      app_net:
-#        ipv4_address: 172.16.238.5
-
-
-  php71:
-    container_name: php71
-    build: $PWD/php7.1
-    restart: always
-    volumes:
-      - /srv/web/www:/srv/web/www
-      - /srv/web/logs:/srv/web/logs
-      - $PWD/php7.1/php.ini:/usr/local/etc/php/php.ini
-      - composer-data:/composer
-    privileged: true
-    working_dir: /srv/web/www
-    ports:
-      - '9501-9510:9501-9510'
-    links:
-#      - mysql56
-      - mysql57
-      - redis4
-    depends_on:
-#      - mysql56
-      - mysql57
-      - redis4
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.6
-
-
-  php72:
-    container_name: php72
-    build: $PWD/php7.2
-    restart: always
-    volumes:
-      - /srv/web/www:/srv/web/www
-      - /srv/web/logs:/srv/web/logs
-      - $PWD/php7.2/php.ini:/usr/local/etc/php/php.ini
-      - composer-data:/composer
-    privileged: true
-    working_dir: /srv/web/www
-    ports:
-      - '9511-9521:9501-9511'
-    links:
-#      - mysql56
-      - mysql57
-      - redis4
-    depends_on:
-#      - mysql56
-      - mysql57
-      - redis4
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.7
-
-  php73:
-    container_name: php73
-    build: $PWD/php7.3
-    restart: always
-    volumes:
-      - /srv/web/www:/srv/web/www
-      - /srv/web/logs:/srv/web/logs
-      - $PWD/php7.3/php.ini:/usr/local/etc/php/php.ini
-      - composer-data:/composer
-    privileged: true
-    working_dir: /srv/web/www
-    ports:
-      - '9511-9521:9501-9511'
-    links:
-      #      - mysql56
-      - mysql8
-      - redis4
-    depends_on:
-      #      - mysql56
-      - mysql8
-      - redis4
-    networks:
-      app_net:
-        ipv4_address: 172.16.238.13
-
-
   nginx:
     container_name: nginx
     build: $PWD/nginx
@@ -171,14 +70,14 @@ services:
     privileged: true
     ports:
       - 80:80
-    links:
+    # links:
 #      - php56
-      - php71
-      - php72
-    depends_on:
+      # - php71
+      # - php72
+    # depends_on:
 #      - php56
-      - php71
-      - php72
+      # - php71
+      # - php72
     networks:
       app_net:
         ipv4_address: 172.16.238.8
@@ -248,8 +147,8 @@ services:
 
 # 挂载
 volumes:
-  composer-data:
-    external: true
+  # composer-data:
+    # external: true
   portainer_data:
     external: true
 
