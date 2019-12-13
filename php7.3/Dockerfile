@@ -32,9 +32,11 @@ RUN docker-php-ext-install bcmath exif gettext intl pcntl shmop soap sockets sys
 #    && docker-php-ext-enable swoole
 RUN pecl install mongodb \
    && pecl install swoole \
+   && pecl install redis \
 #    && docker-php-ext-enable xdebug \
    && docker-php-ext-enable mongodb \
-   && docker-php-ext-enable swoole
+   && docker-php-ext-enable swoole \
+   && docker-php-ext-enable redis
 
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer

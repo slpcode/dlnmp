@@ -18,10 +18,12 @@ RUN pecl install xdebug-2.6.0 \
 RUN pecl install mongodb \
     && pecl install imagick \
     && pecl install swoole \
+    && pecl install redis \
     && docker-php-ext-enable xdebug \
     && docker-php-ext-enable mongodb \
     && docker-php-ext-enable swoole \
-    && docker-php-ext-enable imagick
+    && docker-php-ext-enable imagick \
+    && docker-php-ext-enable redis
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
