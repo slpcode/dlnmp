@@ -1,5 +1,5 @@
 FROM php:7.3.10-fpm-alpine3.10
-MAINTAINER <1370808424@qq.com>矢量丿
+MAINTAINER <1370808424@qq.com>slpcode
 # 安装php扩展
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
 #RUN apk add --no-cache tzdata git \
