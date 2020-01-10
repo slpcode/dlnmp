@@ -67,7 +67,7 @@ services:
 #      - /srv/web/www:/srv/web/www
 #      - /srv/web/logs:/srv/web/logs
 #      - $PWD/php5.6/php.ini:/usr/local/etc/php/php.ini
-#      - composer-data:/composer
+#      - composer-data56:/composer56
 #    privileged: true
 #    working_dir: /srv/web/www
 #    links:
@@ -91,7 +91,7 @@ services:
       - /srv/web/www:/srv/web/www
       - /srv/web/logs:/srv/web/logs
       - $PWD/php7.1/php.ini:/usr/local/etc/php/php.ini
-      - composer-data:/composer
+      - composer-data71:/composer71
     privileged: true
     working_dir: /srv/web/www
     ports:
@@ -117,7 +117,7 @@ services:
       - /srv/web/www:/srv/web/www
       - /srv/web/logs:/srv/web/logs
       - $PWD/php7.2/php.ini:/usr/local/etc/php/php.ini
-      - composer-data:/composer
+      - composer-data72:/composer72
     privileged: true
     working_dir: /srv/web/www
     ports:
@@ -142,7 +142,7 @@ services:
       - /srv/web/www:/srv/web/www
       - /srv/web/logs:/srv/web/logs
       - $PWD/php7.3/php.ini:/usr/local/etc/php/php.ini
-      - composer-data:/composer
+      - composer-data73:/composer73
     privileged: true
     working_dir: /srv/web/www
     ports:
@@ -248,7 +248,13 @@ services:
 
 # 挂载
 volumes:
-  composer-data:
+  composer-data73:
+    external: true
+  composer-data56:
+    external: true
+  composer-data71:
+    external: true
+  composer-data72:
     external: true
   portainer_data:
     external: true
