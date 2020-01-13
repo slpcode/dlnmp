@@ -1,9 +1,10 @@
 FROM php:7.3.10-fpm-alpine3.10
 MAINTAINER <1370808424@qq.com>slpcode
 # 安装php扩展
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
 #RUN apk add --no-cache tzdata git \
-    && apk upgrade \
+    # && apk upgrade \
+RUN apk upgrade \
     && apk add --no-cache tzdata git \
     icu-dev gettext-dev libxml2-dev libzip libzip-dev \
     libmcrypt-dev libjpeg-turbo-dev libpng-dev freetype-dev autoconf g++ make \

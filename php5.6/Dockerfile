@@ -1,8 +1,9 @@
 FROM php:5.6.37-fpm-alpine3.7
 MAINTAINER <1370808424@qq.com>slpcode
 # 安装php扩展
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
-    && apk add --no-cache tzdata git \
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+RUN apk add --no-cache tzdata git \
+    # && apk add --no-cache tzdata git \
     icu-dev gettext-dev libxml2-dev \
     libmcrypt-dev libjpeg-turbo-dev libpng-dev freetype-dev autoconf g++ make \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
