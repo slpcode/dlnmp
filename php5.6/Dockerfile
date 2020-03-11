@@ -14,10 +14,10 @@ RUN docker-php-ext-install bcmath exif gettext intl pcntl shmop soap sockets sys
     && docker-php-ext-install gd
 
 #RUN pecl install xdebug-2.5.5 \
-#RUN pecl install mongodb \
+RUN pecl install mongodb \
 #    && pecl install swoole \
 #    && docker-php-ext-enable xdebug \
-#    && docker-php-ext-enable mongodb
+   && docker-php-ext-enable mongodb
 #    && docker-php-ext-enable swoole
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
