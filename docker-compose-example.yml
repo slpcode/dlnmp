@@ -2,18 +2,15 @@ version: '3.7'
 
 # 挂载
 volumes:
-  composer-data73:
   composer-data56:
   composer-data71:
   composer-data72:
+  composer-data73:
   portainer_data:
 
 networks:
   app_net:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.16.238.0/24
   walle-net:
     driver: bridge
 
