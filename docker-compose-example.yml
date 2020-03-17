@@ -153,6 +153,7 @@ services:
     privileged: true
     ports:
       - ${NGINX_PORT}:80
+      - ${NGINX_SSL_PORT}:443
     networks:
       - app_net
 
@@ -235,8 +236,6 @@ services:
       - /srv/dockerData/walle_home/codebase/:/opt/walle_home/codebase/
       - /srv/dockerData/walle_home/logs/:/opt/walle_home/logs/
       - /root/.ssh:/root/.ssh/
-    depends_on:
-      - mysql57
     networks:
       - app_net
       - walle-net
