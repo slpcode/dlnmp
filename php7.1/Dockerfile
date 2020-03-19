@@ -1,5 +1,5 @@
 #FROM php:7.1.20-fpm-alpine3.7
-FROM php:7.1.30-fpm-alpine3.10
+FROM php:7.1.33-fpm-alpine3.10
 MAINTAINER <1370808424@qq.com>slpcode
 # 安装php扩展
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
