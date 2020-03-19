@@ -31,6 +31,6 @@ ENV PATH $PATH:/composer71/vendor/bin
 ENV COMPOSER_HOME /composer71
 
 RUN mkdir /composer71 \
-    && /usr/bin/composer selfupdate \
+#    && /usr/bin/composer selfupdate \
     && /usr/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
     && composer global require symfony/var-dumper -vvv
