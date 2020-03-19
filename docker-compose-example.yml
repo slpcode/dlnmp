@@ -21,8 +21,8 @@ services:
     build: $PWD/mysql5.7
     restart: always
     volumes:
-      - $PWD/mysql5.7/mysql.conf.d/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
       - /srv/dockerData/mysql:/var/lib/mysql
+      - /srv/dockerData/backup:/srv/dockerData/backup
     privileged: true
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL57_INIT_PASSWORD}
@@ -43,6 +43,7 @@ services:
     restart: always
     volumes:
       - /srv/dockerData/mysql8:/var/lib/mysql
+      - /srv/dockerData/backup:/srv/dockerData/backup
     privileged: true
     environment:
       MYSQL_ROOT_PASSWORD: 123456
