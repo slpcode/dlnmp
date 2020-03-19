@@ -63,8 +63,7 @@ services:
     build: $PWD/php5.6
     restart: always
     volumes:
-      - /srv/web/www:/srv/web/www
-      - /srv/web/logs:/srv/web/logs
+      - /srv/web:/srv/web
       - $PWD/php5.6/php.ini:/usr/local/etc/php/php.ini
       - composer-data56:/composer56
     privileged: true
@@ -84,8 +83,7 @@ services:
     build: $PWD/php7.1
     restart: always
     volumes:
-      - /srv/web/www:/srv/web/www
-      - /srv/web/logs:/srv/web/logs
+      - /srv/web:/srv/web
       - $PWD/php7.1/php.ini:/usr/local/etc/php/php.ini
       - composer-data71:/composer71
     privileged: true
@@ -105,8 +103,7 @@ services:
     build: $PWD/php7.2
     restart: always
     volumes:
-      - /srv/web/www:/srv/web/www
-      - /srv/web/logs:/srv/web/logs
+      - /srv/web:/srv/web
       - $PWD/php7.2/php.ini:/usr/local/etc/php/php.ini
       - composer-data72:/composer72
     privileged: true
@@ -126,8 +123,7 @@ services:
     build: $PWD/php7.3
     restart: always
     volumes:
-      - /srv/web/www:/srv/web/www
-      - /srv/web/logs:/srv/web/logs
+      - /srv/web:/srv/web
       - $PWD/php7.3/php.ini:/usr/local/etc/php/php.ini
       - composer-data73:/composer73
     privileged: true
@@ -147,7 +143,7 @@ services:
     build: $PWD/nginx
     restart: always
     volumes:
-      - /srv/web/www:/srv/web/www
+      - /srv/web:/srv/web
       - $PWD/nginx/conf.d:/etc/nginx/conf.d
       - $PWD/nginx/nginx.conf:/etc/nginx/nginx.conf
       - /srv/letsencrypt:/srv/letsencrypt
