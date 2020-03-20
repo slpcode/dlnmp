@@ -69,12 +69,6 @@ services:
       - composer-data56:/composer56
     privileged: true
     working_dir: /srv/web/www
-    links:
-      - mysql57
-      - redis4
-    depends_on:
-      - mysql57
-      - redis4
     networks:
       - app_net
 
@@ -89,12 +83,6 @@ services:
       - composer-data71:/composer71
     privileged: true
     working_dir: /srv/web/www
-    links:
-      - mysql57
-      - redis4
-    depends_on:
-      - mysql57
-      - redis4
     networks:
       - app_net
 
@@ -109,12 +97,6 @@ services:
       - composer-data72:/composer72
     privileged: true
     working_dir: /srv/web/www
-    links:
-      - mysql57
-      - redis4
-    depends_on:
-      - mysql57
-      - redis4
     networks:
       - app_net
 
@@ -129,12 +111,6 @@ services:
       - composer-data73:/composer73
     privileged: true
     working_dir: /srv/web/www
-    links:
-      - mysql57
-      - redis4
-    depends_on:
-      - mysql57
-      - redis4
     networks:
       - app_net
 
@@ -171,13 +147,13 @@ services:
     networks:
       - app_net
 
-  mongo:
-    container_name: mongo3.4
-    hostname: mongo
-    image: mongo:3.4
+  mongo42:
+    container_name: mongo42
+    hostname: mongo42
+    image: mongo:4.2
     restart: always
     volumes:
-      - /srv/dockerData/mongodbData:/data/db
+      - /srv/dockerData/mongodbData42:/data/db
     privileged: true
     ports:
       - ${MONGO_PORT}:27017
