@@ -26,6 +26,5 @@ ENV PATH $PATH:/composer72/vendor/bin
 ENV COMPOSER_HOME /composer72
 
 RUN mkdir /composer72 \
-    && /usr/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ \
-    && /usr/bin/composer selfupdate
+    && /usr/bin/composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
