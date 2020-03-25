@@ -1,37 +1,34 @@
-# lnmp
+# ldnmp
 
 #### 项目介绍
-使用docker搭建的lnmp环境，支持redis，composer
-
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1. xxxx
-2. xxxx
-3. xxxx
+使用docker搭建的可同时启动多个php版本的环境
+每个php都在单独的容器内，互不干扰，通过共同的网络相连接
+目前支持的有 mysql5.7,mysql8,php5.6,php7.1,php7.2,php7.3,nginx,redis,phpRedisAdmin,mongo,walle(瓦力部署工具),portainer
 
 #### 使用说明
+本软件只适合linux系统，而且里面固定了初始路径为 /srv/，如果需要可自行更改文件
+```shell script
+git clone https://gitee.com/last-order/lnmp.git
+cd lnmp
+cp .env.example .env
+cp docker-compose-example.yml docker-compose.yml
+docker-compose up -d [php73|php71|mysql8|redis4] 
+// 例如 docker-compose up -d php73 nginx mysql8 redis4 代表只启动这几个
 
-1. xxxx
-2. xxxx
-3. xxxx
+# 进入某个容器
+docker exec -it php73 sh
+docker exec -it nginx sh
+docker exec -it mysql8 bash
 
-#### 参与贡献
+#例如进入php73 
+docker exec -it php73 sh
+#然后在php73容器内
+php --version  
+#或
+composer --version
 
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+####具体其它的可看对应的Dockerfile
+
+```
 
 
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [http://git.mydoc.io/](http://git.mydoc.io/)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
